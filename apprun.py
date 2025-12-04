@@ -93,10 +93,6 @@ def predict():
     level = {1: "Low", 2: "Moderate", 3: "High"}.get(level_num, "Moderate")
     return jsonify({"level": level, "level_num": level_num})
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)
-
 @app.route("/chat", methods=["POST"])
 def chat():
     data = request.get_json(force=True) or {}
@@ -116,3 +112,8 @@ def chat():
         return jsonify({"reply": reply})
     except Exception as e:
         return jsonify({"reply": f"Error talking to AI: {e}"}), 500
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
+
